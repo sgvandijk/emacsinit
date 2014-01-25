@@ -11,6 +11,7 @@
  '(cua-mode t nil (cua-base))
  '(custom-enabled-themes (quote (tango-dark)))
  '(indent-tabs-mode nil)
+ '(js-indent-level 2)
  '(safe-local-variable-values (quote ((TeX-engine . pdftex) (TeX-master . t) (TeX-engine . luatex))))
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
@@ -117,6 +118,7 @@ M-x compile.
             (global-set-key [?\C-x kp-add] 'hs-toggle-hiding)
             (global-set-key [?\C-x C-kp-add] 'hs-show-all)
             (global-set-key [?\C-x C-kp-subtract] 'hs-hide-all)
+            (semantic-mode 1)
 	    ))
 
 (add-hook 'c++-mode-hook
