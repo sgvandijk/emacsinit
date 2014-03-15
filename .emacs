@@ -108,6 +108,16 @@ M-x compile.
 (add-hook 'bibtex-mode-hook
 	  'turn-on-auto-revert-mode)
 
+(setq semantic-default-submodes (append semantic-default-submodes
+                                        '(global-semantic-idle-local-symbol-highlight-mode
+                                          global-semantic-idle-completions-mode
+                                          global-semantic-idle-summary-mode
+                                          global-semantic-decoration-mode
+                                          global-semantic-highlight-func-mode
+                                          global-semantic-stickyfunc-mode
+                                          global-semantic-show-unmatched-syntax-mode
+                                          global-semantic-mru-bookmark-mode)))
+(semantic-mode 1)
 
 ;;; Hooks run when going into c-mode
 (add-hook 'c-mode-common-hook
@@ -118,7 +128,6 @@ M-x compile.
             (global-set-key [?\C-x kp-add] 'hs-toggle-hiding)
             (global-set-key [?\C-x C-kp-add] 'hs-show-all)
             (global-set-key [?\C-x C-kp-subtract] 'hs-hide-all)
-            (semantic-mode 1)
 	    ))
 
 (add-hook 'c++-mode-hook
