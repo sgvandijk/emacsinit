@@ -10,8 +10,12 @@
  '(ac-clang-cflags (quote ("-I/usr/local/include/pcl-1.7" "-I/usr/include/eigen3")))
  '(cua-mode t nil (cua-base))
  '(custom-enabled-themes (quote (tango-dark)))
+ '(flycheck-clang-include-path (quote ("/usr/include/i386-linux-gnu/c++/4.8/" "/usr/include/eigen3" "/home/sander/bold-humanoid/rapidjson/include" "/usr/include/sigc++-2.0/" "/usr/lib/i386-linux-gnu/sigc++-2.0/include/")))
+ '(flycheck-clang-language-standard "c++11")
+ '(flycheck-clang-warnings (quote ("no-deprecated")))
+ '(flycheck-cppcheck-checks (quote ("style")))
  '(indent-tabs-mode nil)
- '(js-indent-level 2)
+ '(js-indent-level 4)
  '(safe-local-variable-values (quote ((TeX-engine . pdftex) (TeX-master . t) (TeX-engine . luatex))))
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
@@ -27,6 +31,8 @@
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
+
+(package-initialize)
 
 ;;; Turn off system bell
 (setq visible-bell t)
@@ -108,37 +114,44 @@ M-x compile.
 (add-hook 'bibtex-mode-hook
 	  'turn-on-auto-revert-mode)
 
-(setq semantic-default-submodes (append semantic-default-submodes
-                                        '(global-semantic-idle-local-symbol-highlight-mode
-                                          global-semantic-idle-completions-mode
-                                          global-semantic-idle-summary-mode
-                                          global-semantic-decoration-mode
-                                          global-semantic-highlight-func-mode
-                                          global-semantic-stickyfunc-mode
-                                          global-semantic-show-unmatched-syntax-mode
-                                          global-semantic-mru-bookmark-mode)))
-(semantic-mode 1)
+;; (setq semantic-default-submodes (append semantic-default-submodes
+;;                                         '(global-semantic-idle-local-symbol-highlight-mode
+;;                                           global-semantic-idle-completions-mode
+;;                                           global-semantic-idle-summary-mode
+;;                                           global-semantic-decoration-mode
+;;                                           global-semantic-highlight-func-mode
+;;                                           global-semantic-stickyfunc-mode
+;;                                           global-semantic-show-unmatched-syntax-mode
+;;                                           global-semantic-mru-bookmark-mode)))
+;; (semantic-mode 1)
 
-;;; Hooks run when going into c-mode
-(add-hook 'c-mode-common-hook
-	  (lambda ()
-	    (modify-syntax-entry ?_ "w") ; Underscores are part of words
-	    ; Code hiding/folding
-            (hs-minor-mode)
-            (global-set-key [?\C-x kp-add] 'hs-toggle-hiding)
-            (global-set-key [?\C-x C-kp-add] 'hs-show-all)
-            (global-set-key [?\C-x C-kp-subtract] 'hs-hide-all)
-	    ))
-
-(add-hook 'c++-mode-hook
-          (lambda ()
-            (yas-minor-mode)
-            ))
-
+(ac-config-default)
 (eval-after-load "yasnippet"
   '(progn
      (yas-reload-all t)
      ))
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/irony-mode/elisp/"))
+(require 'irony)
+(irony-enable 'ac)
+
+;;; Hooks run when going into c-mode
+(defun my-c-mode-hook ()
+  (modify-syntax-entry ?_ "w") ; Underscores are part of words
+
+  (yas-minor-mode)
+
+  (hs-minor-mode) ; Code hiding/folding
+  (define-key global-map (kbd "C-c +") 'hs-toggle-hiding)
+  (define-key global-map (kbd "C-c C-+") 'hs-show-all)
+  (define-key global-map (kbd "C-c C--") 'hs-hide-all)
+
+  (define-key global-map (kbd "C-c ;") 'iedit-mode)
+  (irony-mode 1)
+)
+
+(add-hook 'c-mode-common-hook 'my-c-mode-hook)
+(add-hook 'c++-mode-hook 'my-c-mode-hook)
 
 ;;; Haskell mode
 (autoload 'haskell-mode "haskell-mode")
