@@ -17,7 +17,6 @@
  '(indent-tabs-mode nil)
  '(js-indent-level 4)
  '(safe-local-variable-values (quote ((TeX-engine . pdftex) (TeX-master . t) (TeX-engine . luatex))))
- '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 
 (custom-set-faces
@@ -85,7 +84,8 @@ M-x compile.
 (global-linum-mode 1)
 
 ;;; No tool bar
-(tool-bar-mode -1)
+ (if window-system
+     (tool-bar-mode -1))
 
 ;;; Load latex stuff
 (setq-default TeX-master nil)
@@ -132,8 +132,8 @@ M-x compile.
      ))
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/irony-mode/elisp/"))
-(require 'irony)
-(irony-enable 'ac)
+;(require 'irony)
+;(irony-enable 'ac)
 
 ;;; Hooks run when going into c-mode
 (defun my-c-mode-hook ()
