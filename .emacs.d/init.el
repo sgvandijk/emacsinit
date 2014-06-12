@@ -19,19 +19,19 @@
  '(safe-local-variable-values (quote ((TeX-engine . pdftex) (TeX-master . t) (TeX-engine . luatex))))
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "Grey15" :foreground "Grey" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 83 :width normal :foundry "unknown" :family "Liberation Mono")))))
+;; Load local configuration file
+(load "~/.emacs.d/local.el")
 
-;;; Use MELPA repository
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+;; Package Manager
+;; See ~Cask~ file for its configuration
+;; https://github.com/cask/cask
+(require 'cask "~/.cask/cask.el")
+(cask-initialize)
 
-(package-initialize)
+;; Keeps ~Cask~ file in sync with the packages
+;; that you install/uninstall via ~M-x list-packages~
+;; https://github.com/rdallasgray/pallet
+(require 'pallet)
 
 ;;; Turn off system bell
 (setq visible-bell t)
