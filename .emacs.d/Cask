@@ -1,0 +1,10 @@
+(source gnu)
+(source marmalade)
+(source melpa)
+
+(depends-on "auto-complete")
+(depends-on "cask")
+(depends-on "flycheck")
+(depends-on "magit")
+(depends-on "pallet")
+(depends-on "yasnippet")
