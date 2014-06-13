@@ -50,6 +50,9 @@
 ;;; Uniqiufy buffer names
 (require 'uniquify)
 
+;;; PHP mode
+(require 'php-mode)
+
 ;;; .ih files are c++ files
 (add-to-list 'auto-mode-alist '("[.]ih$" . c++-mode))
 

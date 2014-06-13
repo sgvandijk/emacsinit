@@ -5,6 +5,8 @@
 (depends-on "auto-complete")
 (depends-on "cask")
 (depends-on "flycheck")
+(depends-on "geben")
 (depends-on "magit")
 (depends-on "pallet")
+(depends-on "php-mode")
 (depends-on "yasnippet")

@@ -3,7 +3,7 @@
 if [[ ! -e ~/.cask ]]
 then
     echo "Cloning Cask repo"
-    git clone git@github.com:cask/cask.git ~/.cask
+    git clone https://github.com/cask/cask.git ~/.cask
 fi
 
 if [[ $(grep "cask/bin" ~/.bash_profile) == "" ]]
