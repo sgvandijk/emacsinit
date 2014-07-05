@@ -18,6 +18,7 @@
  '(indent-tabs-mode nil)
  '(js-indent-level 4)
  '(safe-local-variable-values (quote ((TeX-engine . pdftex) (TeX-master . t) (TeX-engine . luatex))))
+ '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 
 ;; Load local configuration file
@@ -56,6 +57,9 @@
 
 ;;; .ih files are c++ files
 (add-to-list 'auto-mode-alist '("[.]ih$" . c++-mode))
+
+;;; .ts ar JS files
+(add-to-list 'auto-mode-alist '("[.]ts$" . js-mode))
 
 ;;; Function to rerun last compile command in appropriate buffer
 (global-set-key (kbd "C-x <f9>") 'compile-again)
@@ -137,8 +141,19 @@ M-x compile.
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/irony-mode/elisp/"))
-;(require 'irony)
-;(irony-enable 'ac)
+
+    (add-hook 'c++-mode-hook 'irony-mode)
+    (add-hook 'c-mode-hook 'irony-mode)
+    (add-hook 'objc-mode-hook 'irony-mode)
+
+    ;; replace the `completion-at-point' and `complete-symbol' bindings in
+    ;; irony-mode's buffers by irony-mode's asynchronous function
+    (defun my-irony-mode-hook ()
+      (define-key irony-mode-map [remap completion-at-point]
+        'irony-completion-at-point-async)
+      (define-key irony-mode-map [remap complete-symbol]
+        'irony-completion-at-point-async))
+    (add-hook 'irony-mode-hook 'my-irony-mode-hook)
 
 ;;; Hooks run when going into c-mode
 (defun my-c-mode-hook ()
@@ -151,7 +166,8 @@ M-x compile.
   (define-key global-map (kbd "C-c C-+") 'hs-show-all)
   (define-key global-map (kbd "C-c C--") 'hs-hide-all)
 
-  (define-key global-map (kbd "C-c ;") 'iedit-mode)
+  (define-key global-map (kbd "C-c ; a") 'mc/mark-all-like-this)
+  (define-key global-map (kbd "C-c ; l") 'mc/edit-beginnings-of-lines)
 )
 
 (add-hook 'c-mode-common-hook 'my-c-mode-hook)
@@ -200,8 +216,8 @@ M-x compile.
 (add-to-list 'auto-mode-alist '("\\.jl\\'" . julia-mode))
 
 ;; Extra bright mode line
-(set-face-background 'mode-line-inactive "#2e3436")
-(set-face-background 'mode-line "#fce94f")
+;(set-face-background 'mode-line-inactive "#2e3436")
+;(set-face-background 'mode-line "#fce94f")
 
 ;; Bind magit
 (global-set-key (kbd "C-x g") 'magit-status)
