@@ -16,6 +16,7 @@
  '(flycheck-cppcheck-checks (quote ("style")))
  '(flycheck-idle-change-delay 0.1)
  '(indent-tabs-mode nil)
+ '(irony-additional-clang-options (quote ("-std=c++11" "-I/usr/include/i386-linux-gnu/c++/4.8/")))
  '(js-indent-level 4)
  '(safe-local-variable-values (quote ((TeX-engine . pdftex) (TeX-master . t) (TeX-engine . luatex))))
  '(tool-bar-mode nil)
@@ -48,6 +49,9 @@
 ;;; Interactive do
 (require 'ido)
 (ido-mode t)
+
+;;; Company mode everywhere
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;;; Uniqiufy buffer names
 (require 'uniquify)
@@ -122,38 +126,35 @@ M-x compile.
 (add-hook 'bibtex-mode-hook
 	  'turn-on-auto-revert-mode)
 
-;; (setq semantic-default-submodes (append semantic-default-submodes
-;;                                         '(global-semantic-idle-local-symbol-highlight-mode
-;;                                           global-semantic-idle-completions-mode
-;;                                           global-semantic-idle-summary-mode
-;;                                           global-semantic-decoration-mode
-;;                                           global-semantic-highlight-func-mode
-;;                                           global-semantic-stickyfunc-mode
-;;                                           global-semantic-show-unmatched-syntax-mode
-;;                                           global-semantic-mru-bookmark-mode)))
-;; (semantic-mode 1)
-
-(ac-config-default)
 (eval-after-load "yasnippet"
   '(progn
      (yas-reload-all t)
      ))
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/irony-mode/elisp/"))
 
-    (add-hook 'c++-mode-hook 'irony-mode)
-    (add-hook 'c-mode-hook 'irony-mode)
-    (add-hook 'objc-mode-hook 'irony-mode)
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
 
-    ;; replace the `completion-at-point' and `complete-symbol' bindings in
-    ;; irony-mode's buffers by irony-mode's asynchronous function
-    (defun my-irony-mode-hook ()
-      (define-key irony-mode-map [remap completion-at-point]
-        'irony-completion-at-point-async)
-      (define-key irony-mode-map [remap complete-symbol]
-        'irony-completion-at-point-async))
-    (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+;; replace the `completion-at-point' and `complete-symbol' bindings in
+;; irony-mode's buffers by irony-mode's function
+(defun my-irony-mode-hook ()
+  (define-key irony-mode-map [remap completion-at-point]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol]
+    'irony-completion-at-point-async))
+(add-hook 'irony-mode-hook 'my-irony-mode-hook)
+
+(setq irony-additional-clang-options (quote ("-std=c++11" "-I/usr/include/i386-linux-gnu/c++/4.8")))
+
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
+
+;; (optional) adds CC special commands to `company-begin-commands' in order to
+;; trigger completion at interesting places, such as after scope operator
+;;     std::|
+(add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
 
 ;;; Hooks run when going into c-mode
 (defun my-c-mode-hook ()
@@ -221,3 +222,9 @@ M-x compile.
 
 ;; Bind magit
 (global-set-key (kbd "C-x g") 'magit-status)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 83 :width normal :foundry "unknown" :family "Liberation Mono")))))
