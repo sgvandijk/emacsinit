@@ -10,6 +10,7 @@
  '(ac-clang-cflags (quote ("-I/usr/local/include/pcl-1.7" "-I/usr/include/eigen3")))
  '(cua-mode t nil (cua-base))
  '(custom-enabled-themes (quote (tango-dark)))
+ '(elpy-modules (quote (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-sane-defaults)))
  '(flycheck-clang-include-path (quote ("/usr/include/i386-linux-gnu/c++/4.8/" "/usr/include/eigen3" "/home/sander/bold-humanoid/rapidjson/include" "/usr/include/sigc++-2.0/" "/usr/lib/i386-linux-gnu/sigc++-2.0/include/" "/home/sander/bold-humanoid/libwebsockets/lib/" "/home/sander/bold-humanoid/test/google-test/include/")))
  '(flycheck-clang-language-standard "c++11")
  '(flycheck-clang-warnings (quote ("no-deprecated")))
@@ -222,3 +223,7 @@ M-x compile.
 
 ;; Bind magit
 (global-set-key (kbd "C-x g") 'magit-status)
+
+
+;; Python mode
+(elpy-enable)
