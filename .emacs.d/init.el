@@ -8,6 +8,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-clang-cflags (quote ("-I/usr/local/include/pcl-1.7" "-I/usr/include/eigen3")))
+ '(c-basic-offset 2)
+ '(c-default-style (quote ((java-mode . "java") (c++-mode . "bsd") (awk-mode . "awk") (other . "gnu"))))
  '(cua-mode t nil (cua-base))
  '(custom-enabled-themes (quote (tango-dark)))
  '(elpy-modules (quote (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-sane-defaults)))
@@ -40,10 +42,6 @@
 ;;; Turn off system bell
 (setq visible-bell t)
 
-;;; Tabbing and indenting
-(setq c-default-style "bsd"
-      c-basic-offset 2)
-
 ;;; Don't show startup message
 (setq inhibit-startup-message t)
 
@@ -52,10 +50,18 @@
 (ido-mode t)
 
 ;;; Company mode everywhere
-(add-hook 'after-init-hook 'global-company-mode)
+;(add-hook 'after-init-hook 'global-company-mode)
 
 ;;; Uniqiufy buffer names
 (require 'uniquify)
+
+
+;;; multiple cursors bindings
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 
 ;;; PHP mode
 (require 'php-mode)
@@ -226,4 +232,15 @@ M-x compile.
 
 
 ;; Python mode
+(eval-after-load 'elpy
+  '(progn
+     (define-key elpy-mode-map (kbd "C-<left>") nil)
+     (define-key elpy-mode-map (kbd "C-<right>") nil)
+     (define-key elpy-mode-map (kbd "C-<up>") nil)
+     (define-key elpy-mode-map (kbd "C-<down>") nil)
+     )
+  )
+
 (elpy-enable)
+
+(require 'ess-site)
