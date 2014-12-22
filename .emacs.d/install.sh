@@ -18,3 +18,7 @@ export PATH=$HOME/.cask/bin:$PATH
 
 cd ~/.emacs.d
 cask install
+
+echo "Now make a symbolic link to one of the local .el files, e.g.:"
+echo
+echo "    ln -s local-inits/linux.el local.el"
