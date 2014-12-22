@@ -29,6 +29,7 @@
 ;; that you install/uninstall via ~M-x list-packages~
 ;; https://github.com/rdallasgray/pallet
 (require 'pallet)
+(pallet-mode t)
 
 ;;; Turn off system bell
 (setq visible-bell t)
