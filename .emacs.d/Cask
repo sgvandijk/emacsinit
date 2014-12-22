@@ -4,6 +4,7 @@
 
 (depends-on "auto-complete")
 (depends-on "cask")
+(depends-on "cmake-mode")
 (depends-on "company")
 (depends-on "company-irony")
 (depends-on "dash")
