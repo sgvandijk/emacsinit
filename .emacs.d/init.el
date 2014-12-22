@@ -7,21 +7,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ac-clang-cflags (quote ("-I/usr/local/include/pcl-1.7" "-I/usr/include/eigen3")))
  '(c-basic-offset 2)
  '(c-default-style (quote ((java-mode . "java") (c++-mode . "bsd") (awk-mode . "awk") (other . "gnu"))))
+ '(elpy-modules (quote (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-sane-defaults)))
  '(cua-mode t nil (cua-base))
  '(custom-enabled-themes (quote (tango-dark)))
- '(elpy-modules (quote (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-sane-defaults)))
- '(flycheck-clang-include-path (quote ("/usr/include/i386-linux-gnu/c++/4.8/" "/usr/include/eigen3" "/home/sander/bold-humanoid/rapidjson/include" "/usr/include/sigc++-2.0/" "/usr/lib/i386-linux-gnu/sigc++-2.0/include/" "/home/sander/bold-humanoid/libwebsockets/lib/" "/home/sander/bold-humanoid/test/google-test/include/")))
- '(flycheck-clang-language-standard "c++11")
- '(flycheck-clang-warnings (quote ("no-deprecated")))
- '(flycheck-cppcheck-checks (quote ("style")))
- '(flycheck-idle-change-delay 0.1)
  '(indent-tabs-mode nil)
- '(irony-additional-clang-options (quote ("-std=c++11" "-I/usr/include/i386-linux-gnu/c++/4.8/")))
  '(js-indent-level 4)
- '(safe-local-variable-values (quote ((TeX-engine . pdftex) (TeX-master . t) (TeX-engine . luatex))))
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 
@@ -64,13 +56,10 @@
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 
 ;;; PHP mode
-(require 'php-mode)
+;(require 'php-mode)
 
 ;;; .ih files are c++ files
 (add-to-list 'auto-mode-alist '("[.]ih$" . c++-mode))
-
-;;; .ts ar JS files
-(add-to-list 'auto-mode-alist '("[.]ts$" . js-mode))
 
 ;;; Function to rerun last compile command in appropriate buffer
 (global-set-key (kbd "C-x <f9>") 'compile-again)
@@ -152,8 +141,6 @@ M-x compile.
   (define-key irony-mode-map [remap complete-symbol]
     'irony-completion-at-point-async))
 (add-hook 'irony-mode-hook 'my-irony-mode-hook)
-
-(setq irony-additional-clang-options (quote ("-std=c++11" "-I/usr/include/i386-linux-gnu/c++/4.8")))
 
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-irony))
