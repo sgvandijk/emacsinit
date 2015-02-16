@@ -231,6 +231,7 @@ M-x compile.
 ;; Python mode
 (eval-after-load 'elpy
   '(progn
+     (load "flymake")
      (define-key elpy-mode-map (kbd "C-<left>") nil)
      (define-key elpy-mode-map (kbd "C-<right>") nil)
      (define-key elpy-mode-map (kbd "C-<up>") nil)
@@ -241,3 +242,13 @@ M-x compile.
 (elpy-enable)
 
 ;(require 'ess-site)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(eval-after-load 'tramp
+  '(vagrant-tramp-enable))
+
