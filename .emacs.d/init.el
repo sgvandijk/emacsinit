@@ -6,13 +6,23 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(c-basic-offset 2)
- '(c-default-style (quote ((java-mode . "java") (c++-mode . "bsd") (awk-mode . "awk") (other . "gnu"))))
+ '(c-default-style
+   (quote
+    ((java-mode . "java")
+     (c++-mode . "bsd")
+     (awk-mode . "awk")
+     (other . "gnu"))))
  '(cua-mode t nil (cua-base))
  '(custom-enabled-themes (quote (tango-dark)))
- '(elpy-modules (quote (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-sane-defaults)))
+ '(elpy-modules
+   (quote
+    (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-sane-defaults)))
+ '(elpy-rpc-backend "rope")
  '(indent-tabs-mode nil)
  '(js-indent-level 4)
- '(safe-local-variable-values (quote ((irony-additional-clang-options "-std=c++11" "-I/usr/include/i386-linux-gnu/c++/4.8/"))))
+ '(safe-local-variable-values
+   (quote
+    ((irony-additional-clang-options "-std=c++11" "-I/usr/include/i386-linux-gnu/c++/4.8/"))))
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 
