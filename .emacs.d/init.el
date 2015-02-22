@@ -20,9 +20,6 @@
  '(elpy-rpc-backend "rope")
  '(indent-tabs-mode nil)
  '(js-indent-level 4)
- '(safe-local-variable-values
-   (quote
-    ((irony-additional-clang-options "-std=c++11" "-I/usr/include/i386-linux-gnu/c++/4.8/"))))
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 
@@ -138,6 +135,8 @@ M-x compile.
      ))
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
+(eval-after-load 'flycheck
+  '(add-to-list 'flycheck-checkers 'irony))
 
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
@@ -149,7 +148,8 @@ M-x compile.
   (define-key irony-mode-map [remap completion-at-point]
     'irony-completion-at-point-async)
   (define-key irony-mode-map [remap complete-symbol]
-    'irony-completion-at-point-async))
+    'irony-completion-at-point-async)
+  (irony-eldoc))
 (add-hook 'irony-mode-hook 'my-irony-mode-hook)
 
 (eval-after-load 'company
@@ -226,7 +226,6 @@ M-x compile.
 
 ;; Bind magit
 (global-set-key (kbd "C-x g") 'magit-status)
-
 
 ;; Python mode
 (eval-after-load 'elpy
