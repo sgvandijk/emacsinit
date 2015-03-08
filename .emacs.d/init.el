@@ -6,19 +6,15 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(c-basic-offset 2)
- '(c-default-style
-   (quote
-    ((java-mode . "java")
-     (c++-mode . "bsd")
-     (awk-mode . "awk")
-     (other . "gnu"))))
+ '(c-default-style (quote ((java-mode . "java") (c++-mode . "bsd") (awk-mode . "awk") (other . "gnu"))))
  '(cua-mode t nil (cua-base))
  '(custom-enabled-themes (quote (tango-dark)))
- '(elpy-modules
-   (quote
-    (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-sane-defaults)))
+ '(elpy-modules (quote (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-sane-defaults)))
  '(elpy-rpc-backend "rope")
+ '(flycheck-clang-include-path (quote ("/usr/include/i386-linux-gnu/c++/4.8/" "/usr/include/eigen3/")))
+ '(flycheck-clang-language-standard "c++11")
  '(indent-tabs-mode nil)
+ '(irony-additional-clang-options (quote ("-I/usr/include/i386-linux-gnu/c++/4.8" "-std=c++11")))
  '(js-indent-level 4)
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
@@ -135,8 +131,6 @@ M-x compile.
      ))
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
-(eval-after-load 'flycheck
-  '(add-to-list 'flycheck-checkers 'irony))
 
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
@@ -148,12 +142,18 @@ M-x compile.
   (define-key irony-mode-map [remap completion-at-point]
     'irony-completion-at-point-async)
   (define-key irony-mode-map [remap complete-symbol]
-    'irony-completion-at-point-async)
-  (irony-eldoc))
+    'irony-completion-at-point-async))
 (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
 
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-irony))
+
+
+(require 'flycheck-irony)
+(eval-after-load 'flycheck
+  '(add-to-list 'flycheck-checkers 'irony))
 
 ;; (optional) adds CC special commands to `company-begin-commands' in order to
 ;; trigger completion at interesting places, such as after scope operator
