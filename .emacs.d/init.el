@@ -238,7 +238,7 @@ M-x compile.
      )
   )
 
-(elpy-enable)
+;(elpy-enable)
 
 ;(require 'ess-site)
 (custom-set-faces
