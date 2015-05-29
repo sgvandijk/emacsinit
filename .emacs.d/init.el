@@ -6,16 +6,28 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(c-basic-offset 2)
- '(c-default-style (quote ((java-mode . "java") (c++-mode . "bsd") (awk-mode . "awk") (other . "gnu"))))
+ '(c-default-style
+   (quote
+    ((java-mode . "java")
+     (c++-mode . "bsd")
+     (awk-mode . "awk")
+     (other . "gnu"))))
  '(cua-mode t nil (cua-base))
  '(custom-enabled-themes (quote (tango-dark)))
- '(elpy-modules (quote (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-sane-defaults)))
+ '(elpy-modules
+   (quote
+    (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-sane-defaults)))
  '(elpy-rpc-backend "rope")
- '(flycheck-clang-include-path (quote ("/usr/include/i386-linux-gnu/c++/4.8/" "/usr/include/eigen3/")))
+ '(flycheck-clang-include-path
+   (quote
+    ("/usr/include/i386-linux-gnu/c++/4.8/" "/usr/include/eigen3/")))
  '(flycheck-clang-language-standard "c++11")
  '(indent-tabs-mode nil)
- '(irony-additional-clang-options (quote ("-I/usr/include/i386-linux-gnu/c++/4.8" "-std=c++11")))
- '(js-indent-level 4)
+ '(irony-additional-clang-options
+   (quote
+    ("-I/usr/include/i386-linux-gnu/c++/4.8" "-std=c++11")))
+ '(ispell-program-name "aspell")
+ '(js-indent-level 2)
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 
@@ -101,29 +113,27 @@ M-x compile.
 ;;; Load latex stuff
 (setq-default TeX-master nil)
 
-(autoload 'tex-mode "auctex")
+;; (autoload 'LaTeX-preview-setup "preview")
+;; (add-hook 'LaTeX-mode-hook #'LaTeX-preview-setup)
 
-(autoload 'LaTeX-preview-setup "preview")
-(add-hook 'LaTeX-mode-hook #'LaTeX-preview-setup)
-
-(add-hook 'LaTeX-mode-hook 
-	  (lambda ()
-	    (setq TeX-auto-save t)
-	    (setq TeX-parse-self t)
-            (setq TeX-engine-alist '((luatex "LuaTeX" "luatex" "lualatex --shell-escape --jobname=%s" "luatex")))
-	    (flyspell-mode)
-	    (LaTeX-math-mode)
-	    (outline-minor-mode)
-	    (turn-on-reftex)
-	    (setq reftex-plug-into-AUCTeX t)
-	    (TeX-PDF-mode t)
-	    )
-	  )
+;; (add-hook 'LaTeX-mode-hook 
+;; 	  (lambda ()
+;; 	    (setq TeX-auto-save t)
+;; 	    (setq TeX-parse-self t)
+;;             (setq TeX-engine-alist '((luatex "LuaTeX" "luatex" "lualatex --shell-escape --jobname=%s" "luatex")))
+;; 	    (flyspell-mode)
+;; 	    (LaTeX-math-mode)
+;; 	    (outline-minor-mode)
+;; 	    (turn-on-reftex)
+;; 	    (setq reftex-plug-into-AUCTeX t)
+;; 	    (TeX-PDF-mode t)
+;; 	    )
+;; 	  )
 
 
-;;; Automatically reload bibtex files
-(add-hook 'bibtex-mode-hook
-	  'turn-on-auto-revert-mode)
+;; ;;; Automatically reload bibtex files
+;; (add-hook 'bibtex-mode-hook
+;; 	  'turn-on-auto-revert-mode)
 
 (eval-after-load "yasnippet"
   '(progn
@@ -132,9 +142,24 @@ M-x compile.
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
-(add-hook 'c++-mode-hook 'irony-mode)
-(add-hook 'c-mode-hook 'irony-mode)
-(add-hook 'objc-mode-hook 'irony-mode)
+;;; Hooks run when going into c-mode
+(defun my-c-mode-hook ()
+  (modify-syntax-entry ?_ "w") ; Underscores are part of words
+
+  (yas-minor-mode)
+
+  (hs-minor-mode) ; Code hiding/folding
+  (define-key global-map (kbd "C-c +") 'hs-toggle-hiding)
+  (define-key global-map (kbd "C-c C-+") 'hs-show-all)
+  (define-key global-map (kbd "C-c C--") 'hs-hide-all)
+
+  (define-key global-map (kbd "C-c ; a") 'mc/mark-all-like-this)
+  (define-key global-map (kbd "C-c ; l") 'mc/edit-beginnings-of-lines)
+  (when (member major-mode irony-known-modes)
+    (irony-mode 1)))
+
+(add-hook 'c-mode-common-hook 'my-c-mode-hook)
+(add-hook 'c++-mode-hook 'my-c-mode-hook)
 
 ;; replace the `completion-at-point' and `complete-symbol' bindings in
 ;; irony-mode's buffers by irony-mode's function
@@ -159,24 +184,6 @@ M-x compile.
 ;; trigger completion at interesting places, such as after scope operator
 ;;     std::|
 (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
-
-;;; Hooks run when going into c-mode
-(defun my-c-mode-hook ()
-  (modify-syntax-entry ?_ "w") ; Underscores are part of words
-
-  (yas-minor-mode)
-
-  (hs-minor-mode) ; Code hiding/folding
-  (define-key global-map (kbd "C-c +") 'hs-toggle-hiding)
-  (define-key global-map (kbd "C-c C-+") 'hs-show-all)
-  (define-key global-map (kbd "C-c C--") 'hs-hide-all)
-
-  (define-key global-map (kbd "C-c ; a") 'mc/mark-all-like-this)
-  (define-key global-map (kbd "C-c ; l") 'mc/edit-beginnings-of-lines)
-)
-
-(add-hook 'c-mode-common-hook 'my-c-mode-hook)
-(add-hook 'c++-mode-hook 'my-c-mode-hook)
 
 ;;; Haskell mode
 (autoload 'haskell-mode "haskell-mode")
