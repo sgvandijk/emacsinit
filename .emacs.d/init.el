@@ -255,6 +255,3 @@ M-x compile.
  ;; If there is more than one, they won't work right.
  )
 
-(eval-after-load 'tramp
-  '(vagrant-tramp-enable))
-
