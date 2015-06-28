@@ -36,6 +36,7 @@
 (depends-on "magit")
 (depends-on "magit-gitflow")
 (depends-on "markdown-mode")
+(depends-on "multi-term")
 (depends-on "multiple-cursors")
 (depends-on "package-build")
 (depends-on "pallet")
