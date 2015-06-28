@@ -88,16 +88,13 @@
 If there was no last time, or there is a prefix argument, this acts like
 M-x compile.
 """
- (interactive "p")
- (if (and (eq pfx 1)
-	  compilation-last-buffer)
-     (progn
-       (set-buffer compilation-last-buffer)
-       (revert-buffer t t))
-   (call-interactively 'compile)))
-
-;;; Follow compilation output
-;(setq compilation-scroll-output t)
+(interactive "p")
+(if (and (eq pfx 1)
+         compilation-last-buffer)
+    (progn
+      (set-buffer compilation-last-buffer)
+      (revert-buffer t t))
+  (call-interactively 'compile)))
 
 ;;; Run debugger
 (global-set-key (kbd "C-x <f10>") 'gdb)
@@ -157,11 +154,16 @@ M-x compile.
 
   (define-key global-map (kbd "C-c ; a") 'mc/mark-all-like-this)
   (define-key global-map (kbd "C-c ; l") 'mc/edit-beginnings-of-lines)
-  (when (member major-mode irony-known-modes)
-    (irony-mode 1)))
+  )
 
-(add-hook 'c-mode-common-hook 'my-c-mode-hook)
 (add-hook 'c++-mode-hook 'my-c-mode-hook)
+(add-hook 'c-mode-hook 'my-c-mode-hook)
+(add-hook 'objc-mode-hook 'my-c-mode-hook)
+
+
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
 
 ;; replace the `completion-at-point' and `complete-symbol' bindings in
 ;; irony-mode's buffers by irony-mode's function
