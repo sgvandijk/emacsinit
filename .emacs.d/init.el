@@ -31,6 +31,8 @@
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 
+(setq magit-last-seen-setup-instructions "1.4.0")
+
 ;; Load local configuration file
 (load "~/.emacs.d/local.el")
 
