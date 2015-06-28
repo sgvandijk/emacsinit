@@ -1,0 +1,5 @@
+/.emacs.d/.cask/
+/.emacs.d/auto-save-list/
+/.emacs.d/eshell/
+/.emacs.d/irony/
+/.emacs.d/local.el
