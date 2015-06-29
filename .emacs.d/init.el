@@ -16,7 +16,12 @@
  '(custom-enabled-themes (quote (tango-dark)))
  '(elpy-modules
    (quote
-    (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-sane-defaults)))
+    (elpy-module-company
+     elpy-module-eldoc
+     elpy-module-pyvenv
+     elpy-module-highlight-indentation
+     elpy-module-yasnippet
+     elpy-module-sane-defaults)))
  '(elpy-rpc-backend "rope")
  '(flycheck-clang-include-path
    (quote
