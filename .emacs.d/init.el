@@ -233,8 +233,8 @@ M-x compile.
 (add-to-list 'auto-mode-alist '("\\.jl\\'" . julia-mode))
 
 ;; Extra bright mode line
-;(set-face-background 'mode-line-inactive "#2e3436")
-;(set-face-background 'mode-line "#fce94f")
+(set-face-background 'mode-line-inactive "#2e3436")
+(set-face-background 'mode-line "#fcaf3e")
 
 ;; Bind magit
 (global-set-key (kbd "C-x g") 'magit-status)
