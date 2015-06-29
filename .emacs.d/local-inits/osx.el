@@ -1,8 +1,5 @@
 (require `cl)
 
-(getenv "PATH")
- (setenv "PATH"
-(concat
- "/usr/texbin" ":"
+(setenv "PATH" (concat "/usr/texbin" ":" (getenv "PATH")))
 
-(getenv "PATH")))
+(setq exec-path (append exec-path '("/usr/local/bin")))
