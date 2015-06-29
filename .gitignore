@@ -3,3 +3,7 @@
 /.emacs.d/eshell/
 /.emacs.d/irony/
 /.emacs.d/local.el
+/.emacs.d/.mc-lists.el
+/.emacs.d/ac-comphist.dat
+/.emacs.d/request/
+/.emacs.d/tramp
