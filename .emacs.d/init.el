@@ -255,4 +255,9 @@ M-x compile.
      )
   )
 
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            (flyspell-mode)
+            ))
 
+;;; init.el ends here
