@@ -242,6 +242,9 @@ M-x compile.
 ;; Bind magit
 (global-set-key (kbd "C-x g") 'magit-status)
 
+(package-initialize)
+(elpy-enable)
+
 ;; Python mode
 (eval-after-load 'elpy
   '(progn
