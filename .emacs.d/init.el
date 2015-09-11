@@ -160,16 +160,13 @@ M-x compile.
 
   (define-key global-map (kbd "C-c ; a") 'mc/mark-all-like-this)
   (define-key global-map (kbd "C-c ; l") 'mc/edit-beginnings-of-lines)
+  (when (member major-mode irony-supported-major-modes)
+    (irony-mode 1))
   )
 
 (add-hook 'c++-mode-hook 'my-c-mode-hook)
 (add-hook 'c-mode-hook 'my-c-mode-hook)
 (add-hook 'objc-mode-hook 'my-c-mode-hook)
-
-
-(add-hook 'c++-mode-hook 'irony-mode)
-(add-hook 'c-mode-hook 'irony-mode)
-(add-hook 'objc-mode-hook 'irony-mode)
 
 ;; replace the `completion-at-point' and `complete-symbol' bindings in
 ;; irony-mode's buffers by irony-mode's function
