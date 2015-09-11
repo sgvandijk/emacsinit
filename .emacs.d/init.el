@@ -120,19 +120,20 @@ M-x compile.
 ;; (autoload 'LaTeX-preview-setup "preview")
 ;; (add-hook 'LaTeX-mode-hook #'LaTeX-preview-setup)
 
-;; (add-hook 'LaTeX-mode-hook 
-;; 	  (lambda ()
-;; 	    (setq TeX-auto-save t)
-;; 	    (setq TeX-parse-self t)
-;;             (setq TeX-engine-alist '((luatex "LuaTeX" "luatex" "lualatex --shell-escape --jobname=%s" "luatex")))
-;; 	    (flyspell-mode)
-;; 	    (LaTeX-math-mode)
-;; 	    (outline-minor-mode)
-;; 	    (turn-on-reftex)
-;; 	    (setq reftex-plug-into-AUCTeX t)
-;; 	    (TeX-PDF-mode t)
-;; 	    )
-;; 	  )
+(add-hook 'LaTeX-mode-hook 
+	  (lambda ()
+	    (setq TeX-auto-save t)
+	    (setq TeX-parse-self t)
+            ;; (setq TeX-engine-alist '((luatex "LuaTeX" "luatex" "lualatex --shell-escape --jobname=%s" "luatex")))
+	    (flyspell-mode)
+	    (LaTeX-math-mode)
+	    (outline-minor-mode)
+	    (turn-on-reftex)
+	    (setq reftex-plug-into-AUCTeX t)
+	    (TeX-PDF-mode t)
+            (company-auctex-init)
+	    )
+	  )
 
 
 ;; ;;; Automatically reload bibtex files
