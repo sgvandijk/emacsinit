@@ -258,4 +258,19 @@ M-x compile.
             (flyspell-mode)
             ))
 
+(defun my-org-mode-hook ()
+  (add-to-list 'org-latex-classes
+               '("koma-article"
+                 "\\documentclass{scrartcl}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+                 )
+               )
+  )
+  
+(add-hook 'org-mode-hook 'my-org-mode-hook)
+
 ;;; init.el ends here
