@@ -21,12 +21,11 @@
  '(flycheck-clang-include-path
    (quote
     ("/usr/include/i386-linux-gnu/c++/4.8/" "/usr/include/eigen3/")))
- '(flycheck-clang-language-standard "c++11")
- '(flycheck-disabled-checkers (quote (php-phpmd)))
+ '(flycheck-clang-language-standard "c++1y")
  '(indent-tabs-mode nil)
  '(irony-additional-clang-options
    (quote
-    ("-I/usr/include/i386-linux-gnu/c++/4.8" "-std=c++11")))
+    ("-I/usr/include/i386-linux-gnu/c++/4.8" "-std=c++1y")))
  '(ispell-program-name "aspell")
  '(js-indent-level 2)
  '(magit-git-executable "/usr/local/bin/git")
