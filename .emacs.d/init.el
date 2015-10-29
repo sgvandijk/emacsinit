@@ -28,7 +28,6 @@
     ("-I/usr/include/i386-linux-gnu/c++/4.8" "-std=c++1y")))
  '(ispell-program-name "aspell")
  '(js-indent-level 2)
- '(magit-git-executable "/usr/local/bin/git")
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 
