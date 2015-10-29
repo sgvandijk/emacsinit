@@ -100,12 +100,6 @@ M-x compile.
 ;;; Run debugger
 (global-set-key (kbd "C-x <f10>") 'gdb)
 
-
-;;; Line numbering
-(linum-mode)
-;;; Number *every* line!
-(global-linum-mode 1)
-
 ;;; No tool bar
  (if window-system
      (tool-bar-mode -1))
@@ -147,6 +141,8 @@ M-x compile.
 ;;; Hooks run when going into c-mode
 (defun my-c-mode-hook ()
   (modify-syntax-entry ?_ "w") ; Underscores are part of words
+
+  (linum-mode 1)
 
   (yas-minor-mode)
 
