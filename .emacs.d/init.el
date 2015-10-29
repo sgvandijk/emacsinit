@@ -16,23 +16,20 @@
  '(custom-enabled-themes (quote (tango-dark)))
  '(elpy-modules
    (quote
-    (elpy-module-company
-     elpy-module-eldoc
-     elpy-module-pyvenv
-     elpy-module-highlight-indentation
-     elpy-module-yasnippet
-     elpy-module-sane-defaults)))
+    (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-sane-defaults)))
  '(elpy-rpc-backend "rope")
  '(flycheck-clang-include-path
    (quote
     ("/usr/include/i386-linux-gnu/c++/4.8/" "/usr/include/eigen3/")))
  '(flycheck-clang-language-standard "c++11")
+ '(flycheck-disabled-checkers (quote (php-phpmd)))
  '(indent-tabs-mode nil)
  '(irony-additional-clang-options
    (quote
     ("-I/usr/include/i386-linux-gnu/c++/4.8" "-std=c++11")))
  '(ispell-program-name "aspell")
  '(js-indent-level 2)
+ '(magit-git-executable "/usr/local/bin/git")
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 
@@ -130,6 +127,7 @@ M-x compile.
 	    (outline-minor-mode)
 	    (turn-on-reftex)
 	    (setq reftex-plug-into-AUCTeX t)
+            (reftex-use-external-file-finders t)
 	    (TeX-PDF-mode t)
             (company-auctex-init)
 	    )
@@ -242,6 +240,9 @@ M-x compile.
 ;; Bind magit
 (global-set-key (kbd "C-x g") 'magit-status)
 
+(require 'magit-gitflow)
+(add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
+
 (package-initialize)
 (elpy-enable)
 
@@ -261,19 +262,34 @@ M-x compile.
             (flyspell-mode)
             ))
 
-(defun my-org-mode-hook ()
-  (add-to-list 'org-latex-classes
-               '("koma-article"
-                 "\\documentclass{scrartcl}"
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
-                 )
-               )
-  )
+;; (defun my-org-mode-hook ()
+;;   (add-to-list 'org-latex-classes
+;;                '("koma-article"
+;;                  "\\documentclass{scrartcl}"
+;;                  ("\\section{%s}" . "\\section*{%s}")
+;;                  ("\\subsection{%s}" . "\\subsection*{%s}")
+;;                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+;;                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
+;;                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+;;                  )
+;;                )
+;;   )
   
-(add-hook 'org-mode-hook 'my-org-mode-hook)
+;; (add-hook 'org-mode-hook 'my-org-mode-hook)
+
+(setq org-default-notes-file "~/Dropbox/GTD/inbox.org")
+(setq org-archive-location "~/Dropbox/GTD/archive.org")
+(setq org-agenda-files (quote ("~/Dropbox/GTD/gtd.org")))
+(setq org-refile-targets '((nil :maxlevel . 2)
+                           ("~/Dropbox/GTD/gtd.org" :maxlevel . 2)))
+(define-key global-map (kbd "C-c c t") 'org-capture)
+
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
 ;;; init.el ends here
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
