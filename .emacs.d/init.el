@@ -36,6 +36,10 @@
 ;; Load local configuration file
 (load "~/.emacs.d/local.el")
 
+;; Enable mouse through SSH
+(require 'mouse)
+(xterm-mouse-mode t)
+
 ;; Package Manager
 ;; See ~Cask~ file for its configuration
 ;; https://github.com/cask/cask
