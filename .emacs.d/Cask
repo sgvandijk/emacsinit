@@ -12,6 +12,7 @@
 (depends-on "company")
 (depends-on "company-auctex")
 (depends-on "company-irony")
+(depends-on "company-irony-c-headers")
 (depends-on "concurrent")
 (depends-on "dash")
 (depends-on "deferred")

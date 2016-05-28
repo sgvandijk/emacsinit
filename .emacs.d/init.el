@@ -172,8 +172,10 @@ M-x compile.
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
 
+(require 'company-irony-c-headers)
 (eval-after-load 'company
-  '(add-to-list 'company-backends 'company-irony))
+  '(add-to-list
+    'company-backends '(company-irony-c-headers company-irony)))
 
 
 (require 'flycheck-irony)
