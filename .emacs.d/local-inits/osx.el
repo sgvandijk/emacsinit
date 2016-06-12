@@ -1,7 +1,7 @@
 (require `cl)
 
-(setq magit-git-executable "/usr/local/bin/git")
+(setenv "PATH" (concat (getenv "PATH") ":" "/Library/TeX/texbin"))
+(add-to-list 'exec-path "/Library/TeX/texbin")
 
-(setenv "PATH" (concat "/Library/TeX/texbin" ":" (getenv "PATH")))
-(setenv "PATH" (concat "/usr/local/bin" ":" (getenv "PATH")))
+(setenv "PATH" (concat (getenv "PATH") ":" "/usr/local/bin"))
 (add-to-list 'exec-path "/usr/local/bin")
