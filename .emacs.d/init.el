@@ -14,14 +14,11 @@
      (other . "gnu"))))
  '(cua-mode t nil (cua-base))
  '(custom-enabled-themes (quote (tango-dark)))
- '(elpy-modules
-   (quote
-    (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-sane-defaults)))
- '(elpy-rpc-backend "rope")
  '(flycheck-clang-include-path
    (quote
     ("/usr/include/i386-linux-gnu/c++/4.8/" "/usr/include/eigen3/")))
  '(flycheck-clang-language-standard "c++1y")
+ '(flycheck-disabled-checkers (quote (php-phpmd python-pylint)))
  '(indent-tabs-mode nil)
  '(irony-additional-clang-options
    (quote
@@ -246,16 +243,28 @@ M-x compile.
 (package-initialize)
 (elpy-enable)
 
+(setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+(add-hook 'elpy-mode 'flycheck-mode)
+
 ;; Python mode
-(eval-after-load 'elpy
-  '(progn
-     (load "flymake")
-     (define-key elpy-mode-map (kbd "C-<left>") nil)
-     (define-key elpy-mode-map (kbd "C-<right>") nil)
-     (define-key elpy-mode-map (kbd "C-<up>") nil)
-     (define-key elpy-mode-map (kbd "C-<down>") nil)
-     )
+(defun my-elpy-mode-hook ()  
+  (define-key elpy-mode-map (kbd "C-<left>") nil)
+  (define-key elpy-mode-map (kbd "C-<right>") nil)
+  (define-key elpy-mode-map (kbd "C-<up>") nil)
+  (define-key elpy-mode-map (kbd "C-<down>") nil)
+  (setq elpy-modules
+        (quote
+         (elpy-module-company
+          elpy-module-eldoc
+          elpy-module-pyvenv
+          elpy-module-highlight-indentation
+          ; elpy-module-yasnippet
+          elpy-module-sane-defaults)
+         ))
+  ;; (setq elpy-rpc-backend "jedi")
   )
+
+(add-hook 'elpy-mode-hook 'my-elpy-mode-hook)
 
 (add-hook 'markdown-mode-hook
           (lambda ()
@@ -285,6 +294,8 @@ M-x compile.
 (define-key global-map (kbd "C-c c t") 'org-capture)
 
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+(exec-path-from-shell-copy-env "WORKON_HOME")
 
 ;;; init.el ends here
 (custom-set-faces
