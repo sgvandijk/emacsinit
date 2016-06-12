@@ -28,10 +28,10 @@
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 
-(setq magit-last-seen-setup-instructions "1.4.0")
-
 ;; Load local configuration file
 (load "~/.emacs.d/local.el")
+
+(setq magit-last-seen-setup-instructions "1.4.0")
 
 ;; Enable mouse through SSH
 (require 'mouse)
@@ -107,9 +107,6 @@ M-x compile.
 ;;; Load latex stuff
 (setq-default TeX-master nil)
 
-;; (autoload 'LaTeX-preview-setup "preview")
-;; (add-hook 'LaTeX-mode-hook #'LaTeX-preview-setup)
-
 (add-hook 'LaTeX-mode-hook 
 	  (lambda ()
 	    (setq TeX-auto-save t)
@@ -126,26 +123,12 @@ M-x compile.
 	    )
 	  )
 
-
-;; ;;; Automatically reload bibtex files
-;; (add-hook 'bibtex-mode-hook
-;; 	  'turn-on-auto-revert-mode)
-
-(eval-after-load "yasnippet"
-  '(progn
-     (yas-reload-all t)
-     ))
-
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;;; Hooks run when going into c-mode
 (defun my-c-mode-hook ()
   (modify-syntax-entry ?_ "w") ; Underscores are part of words
-
   (linum-mode 1)
-
-  (yas-minor-mode)
-
   (hs-minor-mode) ; Code hiding/folding
   (define-key global-map (kbd "C-c +") 'hs-toggle-hiding)
   (define-key global-map (kbd "C-c C-+") 'hs-show-all)
@@ -271,20 +254,6 @@ M-x compile.
             (flyspell-mode)
             ))
 
-;; (defun my-org-mode-hook ()
-;;   (add-to-list 'org-latex-classes
-;;                '("koma-article"
-;;                  "\\documentclass{scrartcl}"
-;;                  ("\\section{%s}" . "\\section*{%s}")
-;;                  ("\\subsection{%s}" . "\\subsection*{%s}")
-;;                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-;;                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
-;;                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
-;;                  )
-;;                )
-;;   )
-  
-;; (add-hook 'org-mode-hook 'my-org-mode-hook)
 
 (setq org-default-notes-file "~/Dropbox/GTD/inbox.org")
 (setq org-archive-location "~/Dropbox/GTD/archive.org")
