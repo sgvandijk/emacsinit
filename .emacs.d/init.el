@@ -125,6 +125,12 @@ M-x compile.
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
+(add-hook 'org-mode-hook
+          (lambda ()
+            (flyspell-mode)
+            )
+          )
+
 ;;; Hooks run when going into c-mode
 (defun my-c-mode-hook ()
   (modify-syntax-entry ?_ "w") ; Underscores are part of words
