@@ -7,3 +7,9 @@
 /.emacs.d/ac-comphist.dat
 /.emacs.d/request/
 /.emacs.d/tramp
+/.emacs.d/custom.el
+/.emacs.d/config.el
+/.emacs.d/config.html
+/.emacs.d/elpa
+/.emacs.d/.org-id-locations
+/.emacs.d/bookmarks
