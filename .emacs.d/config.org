@@ -152,3 +152,28 @@ A collection of defaults for soem global settings
 (setq org-src-fontify-natively t)
 #+END_SRC
 
+* Modes
+
+** YAML
+
+#+BEGIN_SRC emacs-lisp
+(use-package yaml-mode
+  :ensure t)
+#+END_SRC
+
+** Markdown
+
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+  :ensure t)
+#+END_SRC
+
+** OpenSCAD
+
+#+BEGIN_SRC emacs-lisp
+(use-package scad-mode
+  :ensure t
+  :mode "\\.scad\\'"
+  :config
+  (linum-mode 1))
+#+END_SRC
