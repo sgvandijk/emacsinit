@@ -37,37 +37,42 @@ Load local configuration, such as platform dependent stuff
 * Appearance
 ** Theme
 
+Built in dark Tango palette
 #+BEGIN_SRC emacs-lisp
-(use-package tangotango-theme
-  :ensure t
-  :config
-  (load-theme `tangotango)
-)
+(load-theme 'tango-dark)
 #+END_SRC
 
-Very popular theme
-#+BEGIN_SRC emacs-lisp
-(use-package zenburn-theme
-  :ensure t
-  :init
-  (load-theme 'zenburn t t))
-#+END_SRC
+# #+BEGIN_SRC emacs-lisp
+# (use-package tangotango-theme
+#   :ensure t
+#   :config
+#   (load-theme 'tangotango t t)
+# )
+# #+END_SRC
 
-Good-looking[tm] theme with quite fully-supported font-faces for
-various modes.
-#+BEGIN_SRC emacs-lisp
-(use-package moe-theme
-  :ensure t
-  :init
-  (progn
-    ;; (setq moe-theme-resize-markdown-title '(1.5 1.4 1.3 1.2 1.0 1.0))
-    (setq moe-theme-resize-org-title '(1.5 1.4 1.3 1.2 1.1 1.0 1.0 1.0 1.0))
-    ;;(setq moe-theme-resize-rst-title '(1.5 1.4 1.3 1.2 1.1 1.0))
-  )
-  :config
-  ;; (moe-dark)
-)
-#+END_SRC
+# Very popular theme
+# #+BEGIN_SRC emacs-lisp
+# (use-package zenburn-theme
+#   :ensure t
+#   :init
+#   (load-theme 'zenburn t t))
+# #+END_SRC
+
+# Good-looking[tm] theme with quite fully-supported font-faces for
+# various modes.
+# #+BEGIN_SRC emacs-lisp
+# (use-package moe-theme
+#   :ensure t
+#   :init
+#   (progn
+#     ;; (setq moe-theme-resize-markdown-title '(1.5 1.4 1.3 1.2 1.0 1.0))
+#     (setq moe-theme-resize-org-title '(1.5 1.4 1.3 1.2 1.1 1.0 1.0 1.0 1.0))
+#     ;;(setq moe-theme-resize-rst-title '(1.5 1.4 1.3 1.2 1.1 1.0))
+#   )
+#   :config
+#   ;; (moe-dark)
+# )
+# #+END_SRC
 
 # Nice and dark, but org-mode blocks are very distracting
 # #+BEGIN_SRC emacs-lisp
