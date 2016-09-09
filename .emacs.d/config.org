@@ -164,6 +164,15 @@ A collection of defaults for soem global settings
 #+BEGIN_SRC emacs-lisp
 ;; fontify code in code blocks
 (setq org-src-fontify-natively t)
+
+;; set some faces
+(custom-set-faces
+'(org-level-1 ((t (:inherit outline-§ :weight semi-bold :height 1.2))))
+'(org-level-2 ((t (:inherit outline-2 :weight semi-bold :height 1.1))))
+'(org-level-3 ((t (:inherit outline-3 :weight bold))))
+'(org-level-5 ((t (:inherit outline-5))))
+'(org-meta-line ((t (:inherit font-lock-comment-face :height 0.8))))
+)
 #+END_SRC
 
 * Modes
