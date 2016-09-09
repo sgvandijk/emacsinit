@@ -124,7 +124,9 @@ A collection of defaults for soem global settings
 #+BEGIN_SRC emacs-lisp
 (use-package magit
   :ensure t
-  :bind ("C-x g" . magit-status))
+  :bind ("C-x g" . magit-status)
+  :init (setq magit-display-buffer-function
+         #'magit-display-buffer-fullframe-status-v1))
 #+END_SRC
 
 * Ido
