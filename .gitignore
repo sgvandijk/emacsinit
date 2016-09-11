@@ -13,3 +13,5 @@
 /.emacs.d/elpa
 /.emacs.d/.org-id-locations
 /.emacs.d/bookmarks
+backups
+ido.last
