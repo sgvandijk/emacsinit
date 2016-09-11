@@ -161,6 +161,16 @@ A collection of defaults for soem global settings
   (global-flycheck-mode))
 #+END_SRC
 
+* Company mode
+Turn on company mode everywhere
+#+BEGIN_SRC emacs-lisp
+(use-package company
+  :ensure t
+  :defer t
+  :diminish company-mode
+  :config
+  (add-hook 'after-init-hook 'global-company-mode))
+#+END_SRC
 * Org
 
 #+BEGIN_SRC emacs-lisp
@@ -177,8 +187,50 @@ A collection of defaults for soem global settings
 )
 #+END_SRC
 
-* Modes
+* C++
 
+** irony-mode
+irony-mode is an Emacs minor-mode that aims at improving the editing
+experience for the C, C++ and Objective-C languages. It works by using
+a combination of an Emacs package and a C++ program (irony-server)
+that uses libclang.
+
+#+BEGIN_SRC emacs-lisp
+(use-package irony-mode
+  :init
+  (add-hook 'c++-mode-hook 'irony-mode)
+  (add-hook 'c-mode-hook 'irony-mode)
+  (add-hook 'objc-mode-hook 'irony-mode)
+  (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
+(defun my-irony-mode-hook ()
+  (define-key irony-mode-map [remap completion-at-point]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol]
+    'irony-completion-at-point-async))
+#+END_SRC
+
+** flycheck-irony
+Flycheck checker using irony
+
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck-irony
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+#+END_SRC
+
+** company-irony
+Autocompletion using irony
+
+#+BEGIN_SRC emacs-lisp
+(use-package company-irony
+  :config
+  (add-to-list 'company-backends 'company-irony)
+  (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands))
+#+END_SRC
+
+* Modes  
 ** YAML
 
 #+BEGIN_SRC emacs-lisp
@@ -201,4 +253,10 @@ A collection of defaults for soem global settings
   :mode "\\.scad\\'"
   :config
   (linum-mode 1))
+#+END_SRC
+** CMake
+
+#+BEGIN_SRC emacs-lisp
+(use-package cmake-mode
+  :ensure t)
 #+END_SRC
