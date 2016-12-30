@@ -230,6 +230,15 @@ Autocompletion using irony
   (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands))
 #+END_SRC
 
+** eldoc-irony
+Function signatures using irony
+
+#+BEGIN_SRC emacs-lisp
+(use-package irony-eldoc
+  :config
+  (add-hook 'irony-mode-hook 'irony-eldoc))
+#+END_SRC
+
 * Modes  
 ** YAML
 
