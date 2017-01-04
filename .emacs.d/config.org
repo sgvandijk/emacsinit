@@ -248,7 +248,24 @@ Function signatures using irony
   (add-hook 'irony-mode-hook 'irony-eldoc))
 #+END_SRC
 
-* Modes  
+* Python
+
+#+BEGIN_SRC emacs-lisp
+(use-package elpy
+  :ensure t
+  :init
+  (with-eval-after-load 'python (elpy-enable))
+  (setq elpy-modules
+   (quote (elpy-module-company
+     elpy-module-eldoc
+     elpy-module-pyvenv
+     elpy-module-highlight-indentation
+     elpy-module-yasnippet
+     elpy-module-sane-defaults)))
+)
+#+END_SRC
+
+* Modes
 ** YAML
 
 #+BEGIN_SRC emacs-lisp
