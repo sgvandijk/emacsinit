@@ -111,6 +111,7 @@ A collection of defaults for soem global settings
 (setq-default indent-tabs-mode nil)
 (setq-default indicate-empty-lines t)
 (setq-default c-basic-offset 2)
+(setq-default c-default-style "bsd")
 
 (show-paren-mode t)
 (column-number-mode t)
