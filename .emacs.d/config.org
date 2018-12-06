@@ -181,6 +181,16 @@ Turn on company mode everywhere
   :config
   (add-hook 'after-init-hook 'global-company-mode))
 #+END_SRC
+* Projectile
+#+BEGIN_SRC emacs-lisp
+(use-package projectile
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode +1))
+#+END_SRC
+
 * Org
 
 #+BEGIN_SRC emacs-lisp
