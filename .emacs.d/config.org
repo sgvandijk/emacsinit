@@ -47,9 +47,9 @@ Load local configuration, such as platform dependent stuff
 ** Theme
 
 Built in dark Tango palette
-#+BEGIN_SRC emacs-lisp
-(load-theme 'tango-dark)
-#+END_SRC
+# #+BEGIN_SRC emacs-lisp
+# (load-theme 'tango-dark)
+# #+END_SRC
 
 # #+BEGIN_SRC emacs-lisp
 # (use-package tangotango-theme
@@ -60,12 +60,12 @@ Built in dark Tango palette
 # #+END_SRC
 
 # Very popular theme
-# #+BEGIN_SRC emacs-lisp
-# (use-package zenburn-theme
-#   :ensure t
-#   :init
-#   (load-theme 'zenburn t t))
-# #+END_SRC
+#+BEGIN_SRC emacs-lisp
+(use-package zenburn-theme
+  :ensure t
+  :config
+  (load-theme 'zenburn t t))
+#+END_SRC
 
 # Good-looking[tm] theme with quite fully-supported font-faces for
 # various modes.
@@ -345,7 +345,6 @@ Function signatures using irony
 (use-package restclient
   :config
   (use-package company-restclient
-    :ensure t
     :config
     (add-to-list 'company-backends 'company-restclient)))
 #+END_SRC
