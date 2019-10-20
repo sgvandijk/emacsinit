@@ -86,7 +86,7 @@ Built in dark Tango palette
 The Liberation Mono font is compact but readable. It can be downloaded from [[https://fedorahosted.org/liberation-fonts/][Fedora Hosted]].
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'default-frame-alist
-             '(font . "Liberation Mono-8"))
+             '(font . "Hack-8"))
 #+END_SRC
 
 ** Diminish
