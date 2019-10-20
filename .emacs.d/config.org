@@ -282,6 +282,19 @@ Function signatures using irony
   (add-hook 'irony-mode-hook 'irony-eldoc))
 #+END_SRC
 
+** clang-format
+#+BEGIN_SRC emacs-lisp
+(use-package clang-format
+  :ensure t
+  :bind (("C-c f r" . clang-format-region)
+         ("C-c f b" . clang-format-buffer)))
+#+END_SRC
+** uncrustify
+#+BEGIN_SRC emacs-lisp
+(use-package uncrustify-mode
+  :ensure t
+  :bind (("C-c u b" . uncrustify-buffer)))
+#+END_SRC
 * Python
 
 #+BEGIN_SRC emacs-lisp
