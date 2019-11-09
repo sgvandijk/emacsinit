@@ -387,19 +387,3 @@ customize settings in [[file:init.el][init.el]].
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 #+END_SRC
-* SQL
-Load SQL configuration if available
-#+BEGIN_SRC emacs-lisp
-(setq sql-file (expand-file-name "sql.el" user-emacs-directory))
-(if (not (load sql-file)) (message "No SQL configuration found")())
-
-(defun sql-connect-bastion (name)
-"Connect to a predefined SQL connection through bastion"
-  (interactive "sDB:")
-  (let ((default-directory "/ssh:bastion:"))
-       (eval `(let ,(cdr (assoc name sql-connection-alist))
-                    (cl-letf (((symbol-function 'sql-get-login) (&rest what)))
-                    (sql-product-interactive sql-product))))
-       )
-)
-#+END_SRC
