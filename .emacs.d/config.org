@@ -125,6 +125,10 @@ A collection of defaults for soem global settings
 ;; Enable line numbers in prog and config modes
 (add-hook 'prog-mode-hook 'linum-mode)
 (add-hook 'conf-mode-hook 'linum--mode)
+
+;; Enable dir-locals for remote editing
+(setq enable-remote-dir-locals t)
+
 #+END_SRC
 
 * Magit
