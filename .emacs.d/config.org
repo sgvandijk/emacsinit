@@ -83,10 +83,18 @@ Built in dark Tango palette
 
 ** Font
 
-The Liberation Mono font is compact but readable. It can be downloaded from [[https://fedorahosted.org/liberation-fonts/][Fedora Hosted]].
+Adobe's Source Code font is specially designed for coding. It can be
+downloaded from Google fonts:
+https://fonts.google.com/specimen/Source+Code+Pro
+
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'default-frame-alist
-             '(font . "Hack-8"))
+(set-face-attribute 'default nil
+:family "Source Code Pro"
+:height 102
+)
+
+;; (add-to-list 'default-frame-alist
+;;              '(font . "Hack-10"))
 #+END_SRC
 
 ** Diminish
