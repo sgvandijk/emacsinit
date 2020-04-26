@@ -385,11 +385,7 @@ Function signatures using irony
 ** REST Client
 
 #+BEGIN_SRC emacs-lisp
-(use-package restclient
-  :config
-  (use-package company-restclient
-    :config
-    (add-to-list 'company-backends 'company-restclient)))
+(use-package restclient)
 #+END_SRC
 
 * custom.el
