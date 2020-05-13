@@ -38,7 +38,15 @@ Load local configuration, such as platform dependent stuff
 * Appearance
 ** Theme
 
-Built in dark Tango palette
+# Cool blue theme
+#+BEGIN_SRC emacs-lisp
+(use-package nord-theme
+  :ensure t
+  :config
+  (load-theme 'nord t t))
+#+END_SRC
+
+# Built in dark Tango palette
 # #+BEGIN_SRC emacs-lisp
 # (load-theme 'tango-dark)
 # #+END_SRC
@@ -52,12 +60,12 @@ Built in dark Tango palette
 # #+END_SRC
 
 # Very popular theme
-#+BEGIN_SRC emacs-lisp
-(use-package zenburn-theme
-  :ensure t
-  :config
-  (load-theme 'zenburn t t))
-#+END_SRC
+# #+BEGIN_SRC emacs-lisp
+# (use-package zenburn-theme
+#   :ensure t
+#   :config
+#   (load-theme 'zenburn t t))
+# #+END_SRC
 
 # Good-looking[tm] theme with quite fully-supported font-faces for
 # various modes.
