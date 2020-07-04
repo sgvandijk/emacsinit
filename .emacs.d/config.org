@@ -61,10 +61,20 @@ Load local configuration, such as platform dependent stuff
 
 # Very popular theme
 #+BEGIN_SRC emacs-lisp
-(use-package zenburn-theme
+  ;; (use-package zenburn-theme
+  ;;   :ensure t
+  ;;   :config
+  ;;   (load-theme 'zenburn t t))
+#+END_SRC
+
+Base16 provides carefully chosen syntax highlighting and a default set
+of sixteen colors suitable for a wide range of applications.
+
+#+BEGIN_SRC emacs-lisp
+(use-package base16-theme
   :ensure t
   :config
-  (load-theme 'zenburn t t))
+  (load-theme 'base16-ashes t))
 #+END_SRC
 
 # Good-looking[tm] theme with quite fully-supported font-faces for
@@ -91,18 +101,18 @@ Load local configuration, such as platform dependent stuff
 
 ** Font
 
-Adobe's Source Code font is specially designed for coding. It can be
-downloaded from Google fonts:
-https://fonts.google.com/specimen/Source+Code+Pro
+# Adobe's Source Code font is specially designed for coding. It can be
+# downloaded from Google fonts:
+# https://fonts.google.com/specimen/Source+Code+Pro
 
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute 'default nil
-:family "Source Code Pro"
-:height 102
-)
+  ;; (set-face-attribute 'default nil
+  ;; :family "Source Code Pro"
+  ;; :height 102
+  ;; )
 
-;; (add-to-list 'default-frame-alist
-;;              '(font . "Hack-10"))
+  (add-to-list 'default-frame-alist
+               '(font . "Hack-10"))
 #+END_SRC
 
 ** Diminish
@@ -126,6 +136,7 @@ A collection of defaults for soem global settings
 (setq-default indicate-empty-lines t)
 (setq-default c-basic-offset 2)
 (setq-default c-default-style "bsd")
+(setq-default js-indent-level 2)
 
 (show-paren-mode t)
 (column-number-mode t)
@@ -283,7 +294,7 @@ Flycheck checker using irony
   (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 #+END_SRC
 
-** company-irony
+** c1ompany-irony
 Autocompletion using irony
 
 #+BEGIN_SRC emacs-lisp
@@ -323,12 +334,14 @@ Function signatures using irony
   :init
   (with-eval-after-load 'python (elpy-enable))
   (setq elpy-modules
-   (quote (elpy-module-company
+  (quote (elpy-module-company
      elpy-module-eldoc
      elpy-module-pyvenv
      elpy-module-highlight-indentation
      elpy-module-yasnippet
      elpy-module-sane-defaults)))
+  :config
+  (setq  elpy-rpc-python-command "python3")
 )
 #+END_SRC
 
