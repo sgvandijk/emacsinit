@@ -343,6 +343,10 @@ Function signatures using irony
   :config
   (setq  elpy-rpc-python-command "python3")
 )
+
+(use-package pyenv-mode
+  :ensure t
+)
 #+END_SRC
 
 * LaTeX
