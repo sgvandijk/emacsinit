@@ -161,15 +161,16 @@ A collection of defaults for soem global settings
 * Magit
 
 #+BEGIN_SRC emacs-lisp
-(use-package magit
-  :ensure t
-  :bind ("C-x g" . magit-status)
-  :init (setq magit-display-buffer-function
-         #'magit-display-buffer-fullframe-status-v1))
+  (use-package magit
+    :ensure t
+    :bind ("C-x g" . magit-status)
+    :init (setq magit-display-buffer-function
+           #'magit-display-buffer-fullframe-status-v1)
+    (add-hook 'git-commit-setup-hook 'git-commit-turn-on-flyspell))
 
-(use-package forge
-  :ensure t
-  :after magit)
+  (use-package forge
+    :ensure t
+    :after magit)
 #+END_SRC
 
 * Ido
