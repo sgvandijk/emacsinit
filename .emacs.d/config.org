@@ -175,15 +175,46 @@ A collection of defaults for soem global settings
 
 * Ido
 
-#+BEGIN_SRC emacs-lisp
-(use-package ido
-  :ensure t
-  :init
-  (setq ido-enable-flex-matching t)
-  (setq ido-everywhere t)
-  :config
-  (ido-mode t))
-#+END_SRC
+Ido = Interactive Do. Ido adds smart autocompletion in many places
+such as when switching buffers or finding files.
+
+# #+BEGIN_SRC emacs-lisp
+#   (use-package ido
+#     :ensure t
+#       :init
+#       (setq ido-enable-flex-matching t)
+#       (setq ido-everywhere t)
+#       :config
+#       (ido-mode t))
+
+#     ;;; Allow spaces when using ido-find-file
+#     (add-hook 'ido-make-file-list-hook
+#               (lambda ()
+#                 (define-key ido-common-completion-map (kbd "SPC") 'self-insert-command)))
+# #+END_SRC
+
+* Ivy
+
+Ivy is an alternative completion mechanism. 'Counsel' is built on top
+of it to provide enhanced versions of common Emacs commands.
+
+#+begin_src emacs-lisp
+  ;; (use-package counsel
+  ;;   :ensure t
+  ;;   :after ivy
+  ;;   :config (counsel-mode))
+
+  (use-package ivy
+    :ensure t
+    :defer 0.1
+    :diminish
+    :bind (("C-c C-r" . ivy-resume)
+           ("C-x B" . ivy-switch-buffer-other-window))
+    :custom
+    (ivy-count-format "(%d/%d) ")
+    (ivy-use-virtual-buffers t)
+    :config (ivy-mode))
+#+end_src
 
 * Multiple cursors
 
