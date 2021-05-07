@@ -59,23 +59,23 @@ Load local configuration, such as platform dependent stuff
 # )
 # #+END_SRC
 
-# Very popular theme
+Very popular theme
 #+BEGIN_SRC emacs-lisp
-  ;; (use-package zenburn-theme
-  ;;   :ensure t
-  ;;   :config
-  ;;   (load-theme 'zenburn t t))
-#+END_SRC
-
-Base16 provides carefully chosen syntax highlighting and a default set
-of sixteen colors suitable for a wide range of applications.
-
-#+BEGIN_SRC emacs-lisp
-(use-package base16-theme
+  (use-package zenburn-theme
   :ensure t
   :config
-  (load-theme 'base16-ashes t))
+  (load-theme 'zenburn t t))
 #+END_SRC
+
+# Base16 provides carefully chosen syntax highlighting and a default set
+# of sixteen colors suitable for a wide range of applications.
+
+# #+BEGIN_SRC emacs-lisp
+# (use-package base16-theme
+#   :ensure t
+#   :config
+#   (load-theme 'base16-ashes t))
+# #+END_SRC
 
 # Good-looking[tm] theme with quite fully-supported font-faces for
 # various modes.
