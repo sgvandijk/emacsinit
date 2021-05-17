@@ -13,5 +13,7 @@
 /.emacs.d/elpa
 /.emacs.d/.org-id-locations
 /.emacs.d/bookmarks
+/.emacs.d/session.*
 backups
 ido.last
+orgroam.db
