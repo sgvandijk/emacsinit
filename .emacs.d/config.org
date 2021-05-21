@@ -380,15 +380,17 @@ Flycheck checker using irony
 
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck-irony
+  :requires irony
   :config
   (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 #+END_SRC
 
-** c1ompany-irony
+** company-irony
 Autocompletion using irony
 
 #+BEGIN_SRC emacs-lisp
 (use-package company-irony
+  :requires irony
   :config
   (add-to-list 'company-backends 'company-irony)
   (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands))
@@ -399,6 +401,7 @@ Function signatures using irony
 
 #+BEGIN_SRC emacs-lisp
 (use-package irony-eldoc
+  :requires irony
   :config
   (add-hook 'irony-mode-hook 'irony-eldoc))
 #+END_SRC
