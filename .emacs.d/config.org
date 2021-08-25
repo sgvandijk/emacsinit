@@ -301,30 +301,32 @@ Turn on company mode everywhere
 #+BEGIN_SRC emacs-lisp
   (use-package org-roam
     :ensure t
-    :hook (after-init . org-roam-mode)
-    :custom (org-roam-directory "~/Dropbox/org/roam/")
-    :bind (:map org-roam-mode-map
-      (("C-c n l" . org-roam)
-      ("C-c n f" . org-roam-find-file)
-      ("C-c n g" . org-roam-graph))
-    :map org-mode-map
-      (("C-c n i" . org-roam-insert))
-      (("C-c n I" . org-roam-insert-immediate)))
+    :custom (org-roam-directory (file-truename "~/Dropbox/org/roam/"))
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n g" . org-roam-graph)
+           ("C-c n i" . org-roam-node-insert)
+           ("C-c n t" . org-roam-dailies-capture-today)
+           ("C-c n T" . org-roam-dailies-goto-today))
     :init
       (setq org-roam-capture-templates
             '(
-              ("d" "default" plain (function org-roam--capture-get-point)
+              ("d" "default" plain
                "%?"
-               :file-name "%<%Y%m%d%H%M%S>-${slug}"
-               :head "#+title: ${title}\n"
+               :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                                  "#+title: ${title}\n")
                :unnarrowed t)
-              ("m" "meeting" plain (function org-roam--capture-get-point)
+              ("m" "meeting" plain
                "%?"
-               :file-name "meetings/%<%Y%m%d%H%M%S>-${slug}"
-               :head "#+title: ${title}\n"
+               :if-new (file+head "meetings/%<%Y%m%d%H%M%S>-${slug}.org"
+                                  "#+title: ${title}\n")
                :unnarrowed t)
               )
-            ))
+            )
+      :config (org-roam-db-autosync-mode)
+    )
+
+  (setq org-roam-v2-ack t)
 #+END_SRC
 
 * C++
