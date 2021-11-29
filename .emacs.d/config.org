@@ -371,10 +371,9 @@ M-x compile.
 
 ** clang-format
 #+BEGIN_SRC emacs-lisp
-(use-package clang-format
-  :ensure t
-  :bind (("C-c f r" . clang-format-region)
-         ("C-c f b" . clang-format-buffer)))
+  (use-package clang-format+
+    :ensure t
+    :hook ('c-mode-common . #'clang-format+-mode))
 #+END_SRC
 ** uncrustify
 #+BEGIN_SRC emacs-lisp
