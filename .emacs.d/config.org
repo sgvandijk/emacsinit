@@ -158,6 +158,12 @@ A collection of defaults for soem global settings
 
 #+END_SRC
 
+* Auto mode selection
+
+#+begin_src emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
+#+end_src
+
 * Magit
 
 #+BEGIN_SRC emacs-lisp
