@@ -361,59 +361,13 @@ M-x compile.
 (global-set-key (kbd "C-x <f10>") 'gdb)
 #+END_SRC
 
-** irony-mode
-irony-mode is an Emacs minor-mode that aims at improving the editing
-experience for the C, C++ and Objective-C languages. It works by using
-a combination of an Emacs package and a C++ program (irony-server)
-that uses libclang.
+** LSP Mode
 
-#+BEGIN_SRC emacs-lisp
-(use-package irony
-  :diminish irony-mode
-  :init
-  (add-hook 'c++-mode-hook 'irony-mode)
-  (add-hook 'c-mode-hook 'irony-mode)
-  (add-hook 'objc-mode-hook 'irony-mode)
-  (add-hook 'irony-mode-hook 'my-irony-mode-hook)
-  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
-
-(defun my-irony-mode-hook ()
-  (define-key irony-mode-map [remap completion-at-point]
-    'irony-completion-at-point-async)
-  (define-key irony-mode-map [remap complete-symbol]
-    'irony-completion-at-point-async))
-#+END_SRC
-
-** flycheck-irony
-Flycheck checker using irony
-
-#+BEGIN_SRC emacs-lisp
-(use-package flycheck-irony
-  :requires irony
-  :config
-  (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
-#+END_SRC
-
-** company-irony
-Autocompletion using irony
-
-#+BEGIN_SRC emacs-lisp
-(use-package company-irony
-  :requires irony
-  :config
-  (add-to-list 'company-backends 'company-irony)
-  (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands))
-#+END_SRC
-
-** eldoc-irony
-Function signatures using irony
-
-#+BEGIN_SRC emacs-lisp
-(use-package irony-eldoc
-  :requires irony
-  :config
-  (add-hook 'irony-mode-hook 'irony-eldoc))
-#+END_SRC
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+    :ensure t
+    :hook (prog-mode . lsp))
+#+end_src
 
 ** clang-format
 #+BEGIN_SRC emacs-lisp
