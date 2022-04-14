@@ -255,13 +255,16 @@ Turn on company mode everywhere
 #+END_SRC
 * Projectile
 #+BEGIN_SRC emacs-lisp
-(use-package projectile
-  :ensure t
-  :diminish projectile-mode
-  :config
-  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (projectile-mode +1))
+  (use-package projectile
+    :ensure t
+    :diminish projectile-mode
+    :init
+    (projectile-mode +1)
+    :config
+    (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+    (setq projectile-indexing-method 'hybrid)
+    )
 #+END_SRC
 
 * Org
