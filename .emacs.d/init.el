@@ -25,5 +25,9 @@
   (require 'use-package))
 (require 'bind-key)
 
+(use-package org
+	     :ensure t
+	     )
+
 (org-babel-load-file (concat user-emacs-directory "config.org"))
 
