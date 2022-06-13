@@ -283,6 +283,8 @@ Turn on company mode everywhere
     (setq org-src-fontify-natively t)
     ;; hide emphasis markup
     (setq org-hide-emphasis-markers t)
+    ;; default org capture file
+    (setq org-default-notes-file "~/Dropbox/org/tasks/notes.org")
 
     ;; Pretty bullets for headlines
     (use-package org-bullets
