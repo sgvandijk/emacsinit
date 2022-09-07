@@ -377,7 +377,7 @@ M-x compile.
 #+begin_src emacs-lisp
   (use-package lsp-mode
     :ensure t
-    :hook (prog-mode . lsp))
+    :hook (c-mode-common . lsp))
 #+end_src
 
 ** clang-format
