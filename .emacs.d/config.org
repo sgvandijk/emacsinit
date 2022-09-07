@@ -392,6 +392,7 @@ M-x compile.
   :ensure t
   :bind (("C-c u b" . uncrustify-buffer)))
 #+END_SRC
+
 * Python
 
 #+BEGIN_SRC emacs-lisp
@@ -406,8 +407,6 @@ M-x compile.
        elpy-module-highlight-indentation
        elpy-module-yasnippet
        elpy-module-sane-defaults)))
-    :config
-    (setq  elpy-rpc-python-command "python3")
   )
 
   (use-package pyenv-mode
@@ -421,6 +420,7 @@ M-x compile.
   (use-package pyenv-mode-auto
     :ensure t
   )
+
 #+END_SRC
 
 * LaTeX
