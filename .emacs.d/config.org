@@ -305,7 +305,7 @@ Turn on company mode everywhere
      )
 
     ;; set directory to search for tasks for the agenda
-    (setq org-agenda-files '("~/Dropbox/org/tasks/" "~/Dropbox/org/roam/meetings" "~/Dropbox/org/roam/daily"))
+    (setq org-agenda-files '("~/Dropbox/org/tasks/notes.org" "~/Dropbox/org/roam/meetings" "~/Dropbox/org/roam/daily"))
 
     ;; Presentations using reveal.js
     (use-package ox-reveal
