@@ -292,6 +292,9 @@ Turn on company mode everywhere
       :config
       (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
+    ;; Indent bodies with headline texts
+    (setq org-startup-indented t)
+
     ;; set some faces
     (custom-theme-set-faces
      'zenburn
