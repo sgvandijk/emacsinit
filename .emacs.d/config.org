@@ -105,6 +105,8 @@ A collection of defaults for some global settings
 ;; Enable dir-locals for remote editing
 (setq enable-remote-dir-locals t)
 
+;; Use libnotify for alerts
+(setq alert-default-style 'libnotify)
 #+END_SRC
 
 * Auto mode selection
