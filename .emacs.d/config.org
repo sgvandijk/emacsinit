@@ -20,6 +20,22 @@ sudo apt-get update
 sudo apt-get install emacs-snapshot
 #+END_SRC
 
+* Package management
+
+** Quelpa
+
+#+begin_quote
+[[https://github.com/quelpa/quelpa][quelpa]] is a tool to compile and install Emacs Lisp packages locally from local or remote source code.
+#+end_quote
+
+#+begin_src emacs-lisp
+  (use-package quelpa
+    :ensure t)
+
+  (use-package quelpa-use-package
+    :ensure t)
+#+end_src
+
 * Personal Information
 
 #+BEGIN_SRC emacs-lisp
@@ -35,6 +51,7 @@ Load local configuration, such as platform dependent stuff
 (setq local-file (expand-file-name "local.el" user-emacs-directory))
 (load local-file)
 #+END_SRC
+
 * Appearance
 ** Theme
 
@@ -299,6 +316,22 @@ Turn on company mode everywhere
                       (:enabled t)))))
     (add-hook `before-save-hook `eglot-format-buffer)
     )
+#+end_src
+
+* Copilot
+#+begin_src emacs-lisp
+    (use-package copilot
+    :quelpa (copilot :fetcher github
+                     :repo "zerolfx/copilot.el"
+                     :branch "main"
+                     :files ("dist" "*.el"))
+    :hook (prog-mode-hook . copilot-mode))
+#+end_src
+* blacken
+#+begin_src emacs-lisp
+  (use-package blacken
+    :ensure t
+    :hook (python-mode . blacken-mode))
 #+end_src
 
 * uncrustify
